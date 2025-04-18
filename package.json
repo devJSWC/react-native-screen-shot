@@ -1,5 +1,5 @@
 {
-  "name": "@yplabs-ltd/react-native-detector",
+  "name": "react-native-screen-shot",
   "version": "0.1.1",
   "description": "a screenshot and screenrecord detector for react native",
   "main": "lib/commonjs/index",
@@ -36,14 +36,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yplabs-ltd/react-native-detector.git"
+    "url": "git+https://github.com/devJSWC/react-native-screen-shot.git"
   },
   "author": "YPlabs",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/yplabs-ltd/react-native-detector/issues"
+    "url": "https://github.com/devJSWC/react-native-screen-shot/issues"
   },
-  "homepage": "https://github.com/yplabs-ltd/react-native-detector#readme",
+  "homepage": "https://github.com/devJSWC/react-native-screen-shot#readme",
   "devDependencies": {
     "@commitlint/config-conventional": "^8.3.4",
     "@react-native-community/bob": "^0.14.5",
