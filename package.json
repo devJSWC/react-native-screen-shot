@@ -1,5 +1,5 @@
 {
-  "name": "react-native-screen-shot",
+  "name": "@yplabs-ltd/react-native-detector",
   "version": "0.1.1",
   "description": "a screenshot and screenrecord detector for react native",
   "main": "lib/commonjs/index",
