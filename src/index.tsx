@@ -1,4 +1,4 @@
-import { NativeModules, NativeEventEmitter, Platform } from 'react-native'
+import { NativeModules, NativeEventEmitter, Platform, LogBox } from 'react-native'
 
 const { CustomDetector } = NativeModules
 
@@ -8,6 +8,8 @@ enum EventsName {
 }
 
 const detectorEventEmitter = new NativeEventEmitter(CustomDetector)
+
+LogBox.ignoreAllLogs(true);
 
 type Unsubscribe = () => void
 
