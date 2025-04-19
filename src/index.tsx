@@ -1,26 +1,27 @@
-import { NativeModules, NativeEventEmitter, Platform } from 'react-native';
+import { NativeModules, NativeEventEmitter, Platform } from 'react-native'
 
-const { Detector } = NativeModules;
+const { CustomDetector } = NativeModules
 
 enum EventsName {
   UserDidTakeScreenshot = 'UIApplicationUserDidTakeScreenshotNotification',
+  UserDidTakeScreenRecord = 'UIApplicationUserDidTakeScreenRecordNotification',
 }
 
-const detectorEventEmitter = new NativeEventEmitter(Detector);
+const detectorEventEmitter = new NativeEventEmitter(CustomDetector)
 
-type Unsubscribe = () => void;
+type Unsubscribe = () => void
 
 const commonAddScreenshotListener = (listener: () => void): Unsubscribe => {
   const eventSubscription = detectorEventEmitter.addListener(
     EventsName.UserDidTakeScreenshot,
     () => listener(),
     {}
-  );
+  )
 
   return () => {
-    eventSubscription.remove();
-  };
-};
+    eventSubscription.remove()
+  }
+}
 
 const getListenersCount = (): number => {
   return (
@@ -31,35 +32,28 @@ const getListenersCount = (): number => {
     // @ts-ignore
     detectorEventEmitter.listeners?.(EventsName.UserDidTakeScreenshot).length ??
     0
-  );
-};
-
-export const startScreenshotDetection = () => {
-  Detector.startScreenshotDetection()
+  )
 }
 
-export const stopScreenshotDetection = () => {
-  Detector.stopScreenshotDetection()
-}
-
-export const addScreenshotListener = Platform.select<
+export const addScreenshotListeneran = Platform.select<
   (listener: () => void) => Unsubscribe
 >({
-  default: (): Unsubscribe => () => {},
+  default: (): Unsubscribe => () => { },
   ios: commonAddScreenshotListener,
   android: (listener: () => void): Unsubscribe => {
     if (getListenersCount() === 0) {
-      Detector.startScreenshotDetection();
+      CustomDetector.startScreenshotDetection()
     }
 
-    const unsubscribe: Unsubscribe = commonAddScreenshotListener(listener);
+    const unsubscribe: Unsubscribe = commonAddScreenshotListener(listener)
 
     return () => {
-      unsubscribe();
+      unsubscribe()
 
       if (getListenersCount() === 0) {
-        Detector.stopScreenshotDetection();
+        CustomDetector.stopScreenshotDetection()
       }
-    };
+    }
   },
-});
+})
+
